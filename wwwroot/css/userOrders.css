@@ -1,0 +1,70 @@
+﻿html {
+    --primary: #f52d05;
+}
+
+.orders-banner {
+    width: 100vw;
+    height: 40vh;
+}
+
+.orders-banner-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../Images/banner.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.orders-banner-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .orders-banner-inner h1 {
+        color: white;
+    }
+
+.underline {
+    height: 5px;
+    background-color: var(--primary);
+}
+
+.orders-content-section {
+    width: 75%;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.orders-datepickers {
+    margin: 0 auto;
+}
+
+.orders-datepicker-od, .orders-datepicker-do {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 50%;
+    float: left;
+}
+
+.orders-tabulka table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .orders-tabulka table tr th {
+        font-weight: bold;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: #E2E5DE;
+        padding: 8px 0px 8px 0px;
+    }
+
+    .orders-tabulka table tr td {
+        padding: 8px 0px 0px 0px;
+    }
