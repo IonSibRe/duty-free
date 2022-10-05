@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Product>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -44,7 +45,18 @@
 </section>
 <section class="home-showcase-wrap">
     <div class="home-showcase-grid-wrap">
-        <div class="home-showcase-grid-item">
+        @foreach(var obj in Model) {
+            <div class="home-showcase-grid-item">
+                <img src="@obj.ImageUrl" alt="Home Showcase Image" class="home-showcase-grid-item-img" />
+                <h3 class="home-showcase-grid-item-title">@obj.Name</h3>
+                <h5 class="home-showcase-grid-item-stock">Skladem: @obj.Quantity Ks</h5>
+                <div class="home-showcase-grid-item-info-wrap">
+                    <h4 class="home-showcase-grid-item-price">@obj.Price Kč</h4>
+                    <button class="home-showcase-grid-item-btn" type="button">Koupit</button>
+                </div>
+            </div>
+        }
+        @*<div class="home-showcase-grid-item">
             <img src="/Images/bebe.png" alt="Home Showcase Image" class="home-showcase-grid-item-img" />
             <h3 class="home-showcase-grid-item-title">Bebe Dobré ráno</h3>
             <h5 class="home-showcase-grid-item-stock">Skladem: 3 Ks</h5>
@@ -79,15 +91,6 @@
                 <h4 class="home-showcase-grid-item-price">10 Kč</h4>
                 <button class="home-showcase-grid-item-btn" type="button">Koupit</button>
             </div>
-        </div>
-        <div class="home-showcase-grid-item">
-            <img src="/Images/bebe.png" alt="Home Showcase Image" class="home-showcase-grid-item-img" />
-            <h3 class="home-showcase-grid-item-title">Bebe Dobré ráno</h3>
-            <h5 class="home-showcase-grid-item-stock">Skladem: 3 Ks</h5>
-            <div class="home-showcase-grid-item-info-wrap">
-                <h4 class="home-showcase-grid-item-price">10 Kč</h4>
-                <button class="home-showcase-grid-item-btn" type="button">Koupit</button>
-            </div>
-        </div>
+        </div>*@
     </div>
 </section>
