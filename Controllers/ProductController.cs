@@ -1,9 +1,11 @@
 ﻿using DutyFree.Web.Data;
 using DutyFree.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DutyFree.Web.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;

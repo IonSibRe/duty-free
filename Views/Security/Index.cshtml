@@ -1,0 +1,57 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    section {
+        display: flex;
+        justify-content: center;
+    }
+
+    table {
+      width: 1100px;
+      border-collapse: collapse;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style>
+
+<section>
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Image Url</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+        @foreach(var obj in Model) {
+            <tr>
+                <td>@obj.UserId</td>
+                <td>@obj.Name</td>
+                <td>@obj.Email</td>
+                <td>@obj.ImageUrl</td>
+                <td>@obj.Role</td>
+                <td>
+                    @if (User.Identity.IsAuthenticated) {
+                        <a href="/Security/Logout">Odhlásit se</a>
+                    }
+                    else {
+                        <a href="/Security/Login?userId=@obj.UserId">Přihlásit se</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</section>
