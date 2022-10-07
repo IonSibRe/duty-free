@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+<section class="home-banner">
+    <div class="home-banner-inner">
+        <h2 class="home-banner-title">Na co máš chuť</h2>
+        <form class="home-banner-search-form">
+            <input class="home-banner-search-input" type="text" />
+            <button class="home-banner-search-btn" type="button">Vyhledat</button>
+        </form>
+    </div>
+    <div class="home-banner-lower-text-wrap">
+        <p class="home-banner-lower-text">
+            #MojeOblíbené
+        </p>
+        <p class="home-banner-lower-text">
+            #OblíbenéOstatních
+        </p>
+        <p class="home-banner-lower-text">
+            #Sleva
+        </p>
+        <p class="home-banner-lower-text">
+            #Novinka
+        </p>
+        <p class="home-banner-lower-text">
+            #Svačina
+        </p>
+        <p class="home-banner-lower-text">
+            #Sladké
+        </p>
+        <p class="home-banner-lower-text">
+            #Slané
+        </p>
+        <p class="home-banner-lower-text">
+            #Nápoje
+        </p>
+        <p class="home-banner-lower-text">
+            #Zmrzlina
+        </p>
+    </div>
+</section>
+<section class="home-showcase-wrap">
+    <div class="home-showcase-grid-wrap">
+        @foreach(var obj in Model) {
+            <div class="home-showcase-grid-item">
+                <div class="home-showcase-grid-item-wrap">
+                    <img src="@obj.ImageUrl" alt="Home Showcase Image" class="home-showcase-grid-item-img" />
+                </div>
+                <div class ="home-showcase-grid-item-wrap">
+                    <h3 class="home-showcase-grid-item-title">@obj.Name</h3>
+                    <h5 class="home-showcase-grid-item-stock">Skladem: @obj.Quantity Ks</h5>
+                    <div class="home-showcase-grid-item-info-wrap">
+                        <h4 class="home-showcase-grid-item-price">@obj.Price Kč</h4>
+                        <button class="home-showcase-grid-item-btn" type="button">Koupit</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

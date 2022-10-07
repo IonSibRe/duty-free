@@ -1,0 +1,56 @@
+/* Global Config*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none
+}
+
+/* Navbar */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #000;
+    border-bottom: 1px solid #fff;
+}
+
+.nav-inner-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    width: 200px;
+}
+
+.nav-list {
+    display: flex;
+    margin-left: 3rem;
+}
+
+.nav-link {
+    margin-right: 1.5rem;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.nav-link:hover {
+    opacity: 0.9;
+}
