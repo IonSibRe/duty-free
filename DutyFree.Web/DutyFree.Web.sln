@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DutyFree.Web", "DutyFree.Web.csproj", "{AB01562C-2B28-4371-81B3-D7F7C66EA7FA}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DutyFree.Data", "..\DutyFree.Data\DutyFree.Data.sqlproj", "{8993E2A7-E406-44CA-8FD4-ADC989C39933}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DutyFree.Data", "../DutyFree.Data\DutyFree.Data.sqlproj", "{8993E2A7-E406-44CA-8FD4-ADC989C39933}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
