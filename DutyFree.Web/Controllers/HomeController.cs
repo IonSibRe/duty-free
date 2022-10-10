@@ -1,5 +1,6 @@
 ﻿using DutyFree.Web.Data;
 using DutyFree.Web.Models;
+using DutyFree.Web.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -11,11 +12,13 @@ namespace DutyFree.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
+        //private readonly ICurrentUserAccessor _currentUserAccessor;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _db = db;
             _logger = logger;
+            //_currentUserAccessor = currentUserAccessor;
         }
 
         public IActionResult Index()
