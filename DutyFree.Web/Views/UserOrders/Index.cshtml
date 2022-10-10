@@ -1,5 +1,4 @@
-﻿@page
-@model DutyFree.Pages.UserOrdersModel
+﻿@model IEnumerable<Order>
 @{
 }
 
@@ -59,13 +58,17 @@
                     <th>Cena (Zůstatek kreditů)</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>22.03.2022</td>
-                    <td>13:29</td>
-                    <td>Pepsi 0,5 l (mix)</td>
-                    <td>15 Kč (420 Kč)</td>
-                    <td><button class="orders-tabulka-button" type="button">❌</button></td>
-                </tr>
+                @foreach(var obj in Model) {
+                    <tr>
+                        <td>@obj.DateCreated</td>
+                        <td>13:00</td>
+                        <td>@obj.Name</td>
+                        <td>@obj.Price</td>
+                        <td>
+                            <a class="orders-tabulka-button" href="/UserOrders/DeleteOrder?productId=@obj.ProductId">❌</a>
+                        </td>
+                    </tr>
+                }
                 <tr class="orders-total">
                     <td>Cena celkem:</td>
                     <td></td>

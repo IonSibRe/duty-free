@@ -59,7 +59,7 @@
                     <h5 class="home-showcase-grid-item-stock">Skladem: @obj.Quantity Ks</h5>
                     <div class="home-showcase-grid-item-info-wrap">
                         <h4 class="home-showcase-grid-item-price">@obj.Price Kč</h4>
-                        <button class="home-showcase-grid-item-btn" type="button">Koupit</button>
+                        <a class="home-showcase-grid-item-btn" href="/Home/AddOrder?productId=@obj.ProductId">Koupit</a>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 using DutyFree.Web.Models;
 using DutyFree.Web.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,7 +13,6 @@ namespace DutyFree.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
-        //private readonly ICurrentUserAccessor _currentUserAccessor;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
@@ -23,8 +23,26 @@ namespace DutyFree.Web.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objProductList = _db.Products.ToList();
+            IEnumerable <Product> objProductList = _db.Products.ToList();
             return View(objProductList);
+        }
+        public async Task<IActionResult> AddOrder(int productId)
+        {
+            var product = _db.Products.Find(productId);
+            var user = await _db.Users.FindAsync(
+                int.Parse(User.FindFirst("UserId").Value)
+            );
+
+            var order = new Order() {
+                Name = product.Name,
+                Price = product.Price,
+                UserId = user.UserId,
+                ProductId = product.ProductId
+            };
+
+            _db.Orders.Add(order);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "UserOrders");
         }
 
         public IActionResult Privacy()
