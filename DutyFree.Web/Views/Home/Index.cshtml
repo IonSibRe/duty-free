@@ -6,43 +6,47 @@
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 <section class="home-banner">
-    <div class="home-banner-inner">
-        <h2 class="home-banner-title">Na co máš chuť</h2>
-        <form class="home-banner-search-form">
-            <input class="home-banner-search-input" type="text" />
-            <button class="home-banner-search-btn" type="button">Vyhledat</button>
-        </form>
-    </div>
-    <div class="home-banner-lower-text-wrap">
-        <p class="home-banner-lower-text">
-            #MojeOblíbené
-        </p>
-        <p class="home-banner-lower-text">
-            #OblíbenéOstatních
-        </p>
-        <p class="home-banner-lower-text">
-            #Sleva
-        </p>
-        <p class="home-banner-lower-text">
-            #Novinka
-        </p>
-        <p class="home-banner-lower-text">
-            #Svačina
-        </p>
-        <p class="home-banner-lower-text">
-            #Sladké
-        </p>
-        <p class="home-banner-lower-text">
-            #Slané
-        </p>
-        <p class="home-banner-lower-text">
-            #Nápoje
-        </p>
-        <p class="home-banner-lower-text">
-            #Zmrzlina
-        </p>
+    <div class="home-banner-container">
+        <div class="home-banner-inner">
+            <h2 class="home-banner-title">Na co máš chuť</h2>
+            <form class="home-banner-search-form">
+                <input class="home-banner-search-input" type="text" />
+                <button class="home-banner-search-btn" type="button">Vyhledat</button>
+            </form>
+        </div>
+        <div class="home-banner-lower-text-wrap">
+            <p class="home-banner-lower-text">
+                #MojeOblíbené
+            </p>
+            <p class="home-banner-lower-text">
+                #OblíbenéOstatních
+            </p>
+            <p class="home-banner-lower-text">
+                #Sleva
+            </p>
+            <p class="home-banner-lower-text">
+                #Novinka
+            </p>
+            <p class="home-banner-lower-text">
+                #Svačina
+            </p>
+            <p class="home-banner-lower-text">
+                #Sladké
+            </p>
+            <p class="home-banner-lower-text">
+                #Slané
+            </p>
+            <p class="home-banner-lower-text">
+                #Nápoje
+            </p>
+            <p class="home-banner-lower-text">
+                #Zmrzlina
+            </p>
+        </div>
     </div>
 </section>
+<div class="underline"></div>
+
 <section class="home-showcase-wrap">
     <div class="home-showcase-grid-wrap">
         @foreach(var obj in Model) {

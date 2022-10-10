@@ -21,6 +21,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="UserOrders" asp-action="Index">User Orders</a>
+                        </li>
                     }
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Security" asp-action="Index">Security</a>
@@ -41,6 +44,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery-ui.js"></script>
+    <script src="~/lib/jquery/dist/jquery-ui-cz.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

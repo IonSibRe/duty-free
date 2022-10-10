@@ -8,7 +8,7 @@
 }
 
 .orders-banner-container {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../Images/banner.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../Images/banner.png");
     background-position: center;
     background-size: cover;
     width: 100%;
@@ -37,24 +37,33 @@
     margin: auto;
 }
 
+
 h1 {
     text-align: center;
 }
 
 .orders-datepickers {
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .orders-datepicker-od, .orders-datepicker-do {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    font-size: 20px;
+    padding: 25px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
-    float: left;
+}
+
+.orders-datepicker-od p input, .orders-datepicker-do p input {
+    font-size: 20px;
 }
 
 .orders-tabulka table {
     width: 100%;
-    margin-top: 20px;
 }
 
     .orders-tabulka table tr th {
@@ -63,8 +72,53 @@ h1 {
         border-bottom: 1px solid;
         border-color: #E2E5DE;
         padding: 8px 0px 8px 0px;
+        text-align: left;
     }
 
     .orders-tabulka table tr td {
         padding: 8px 0px 0px 0px;
     }
+
+.orders-tabulka-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.orders-total {
+    font-weight: bold;
+}
+
+.orders-export {
+    padding: 25px;
+    float: right;
+    height: 20px;
+    
+}
+
+.orders-export-button {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: transparent;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+    .orders-tabulka{
+        font-size: 10px;
+    }
+
+    .orders-datepicker-od, .orders-datepicker-do {
+        padding: 10px;
+        width: 50%;
+        font-size: 10px;
+    }
+
+        .orders-datepicker-od p input, .orders-datepicker-do p input {
+            font-size: 15px;
+            width: 80%
+        }
+}
