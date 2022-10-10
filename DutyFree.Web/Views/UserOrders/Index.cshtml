@@ -1,0 +1,83 @@
+﻿@page
+@model DutyFree.Pages.UserOrdersModel
+@{
+}
+
+<head>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <script>
+        function getFirstDayOfMonth() {
+            const now = new Date();
+            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+            return firstDay;
+        }
+
+
+        $(function () {
+            $("#datepicker-od").datepicker({
+            });
+            $("#datepicker-od").datepicker("setDate", getFirstDayOfMonth());
+
+            $("#datepicker-do").datepicker();
+            $("#datepicker-do").datepicker("setDate", "today");
+        });
+    </script>
+
+</head>
+
+<link rel="stylesheet" href="~/css/userOrders.css" asp-append-version="true" />
+
+<body>
+    <section class="orders-banner">
+        <div class="orders-banner-container">
+            <div class="orders-banner-inner">
+                <h1>Moje objednávky</h1>
+            </div>
+        </div>
+        <div class="underline"></div>
+    </section>
+
+    <section class="orders-content-section">
+
+        <div class="orders-datepickers">
+            <div class="orders-datepicker-od">
+                <p>Od <input type="text" id="datepicker-od"></p>
+            </div>
+            <div class="orders-datepicker-do">
+                <p>Do <input type="text" id="datepicker-do"></p>
+            </div>
+        </div>
+
+        <div class="orders-tabulka">
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th>Čas</th>
+                    <th>Produkt</th>
+                    <th>Cena (Zůstatek kreditů)</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>22.03.2022</td>
+                    <td>13:29</td>
+                    <td>Pepsi 0,5 l (mix)</td>
+                    <td>15 Kč (420 Kč)</td>
+                    <td><button class="orders-tabulka-button" type="button">❌</button></td>
+                </tr>
+                <tr class="orders-total">
+                    <td>Cena celkem:</td>
+                    <td></td>
+                    <td></td>
+                    <td>15 Kč</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="orders-export">
+            <button class="orders-export-button" type"button">Export</button>
+        </div>
+
+    </section>
+</body>
