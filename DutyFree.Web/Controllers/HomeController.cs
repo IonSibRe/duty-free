@@ -23,7 +23,7 @@ namespace DutyFree.Web.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objProductList = _db.Products.ToList();
+            IEnumerable<Product> objProductList = (IEnumerable<Product>)_db.Products.ToList();
             return View(objProductList);
         }
 

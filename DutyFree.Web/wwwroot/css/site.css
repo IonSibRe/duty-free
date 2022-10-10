@@ -19,7 +19,8 @@ ul {
 }
 
 a {
-    text-decoration: none
+    text-decoration: none;
+    color: black;
 }
 
 /* Navbar */
@@ -57,7 +58,7 @@ a {
 .nav-link {
     margin-right: 1.5rem;
     font-size: 1.25rem;
-    color: #fff;
+    color: #fff !important;
 }
 
 .nav-link:hover {
