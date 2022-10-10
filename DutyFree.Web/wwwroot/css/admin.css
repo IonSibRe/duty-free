@@ -1,2 +1,197 @@
-﻿body {
+﻿html {
+    --primary: #f52d05;
+}
+
+.admin-banner {
+    width: 100%;
+    height: 40vh;
+}
+
+.admin-banner-container {
+    background: url("/Images/banner.png");
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-banner-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .admin-banner-inner h1 {
+        color: white;
+    }
+
+.underline {
+    height: 5px;
+    background-color: var(--primary);
+}
+
+.admin-content-section {
+    width: 75%;
+    margin: auto;
+}
+
+.admin-add-section {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 30px;
+}
+
+    .admin-add-section a {
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+        .admin-add-section a:hover i{
+            color: orangered;
+        }
+
+        .admin-add-section a i {
+            color: var(--primary);
+        }
+
+table {
+    width: 100%;
+}
+
+    table img {
+        max-width: 50px;    
+    }
+
+th {
+    text-align: center;  
+    padding: 5px 0px;
+}
+
+tr {
+    border-bottom: solid lightgray 2px;
+}
+
+.cell-center {
+    text-align: center;
+}
+
+.admin-product td{
+    padding: 25px 20px;
+}
+
+.admin-product-name {
+    padding: 0px 10px;
+    margin: 0px;
+}
+
+.admin-product-description {
+    color: lightgray;
+    padding: 0px 20px;
+    margin: 0px;
+}
+
+.edit-delete-contaniner {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.edit-delete-contaniner a {
+    font-size: 20px;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 0px 5px;
+}
+
+    .edit-delete-contaniner a:hover {
+        color: orangered;
+    }
+
+.add-row {
+    width: 100%;
+    border-bottom: none;
+}
+
+    .add-row td {
+        padding: 5px 10px;
+        padding-bottom: 25px;
+    }
+
+    .add-row label {
+        padding-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .add-row input {
+        margin-right: 30px;
+    }
+
+.admin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn-success {
+    background-color: var(--primary);
+    border: orange;
+}
+
+    .btn-success:hover {
+        background-color: #ff5324;
+    }
+
+    .btn-success:focus {
+        background-color: #ff5324;   
+    }
+
+
+.image {
+    
+}
+
+.img-edit {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#image {
+    display: flex;
+    gap: 10px;
+}
+
+.image-add {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    top: 32px;
+}
+
+.image-add label {
+    top: 50px;
+}
+
+
+#image-select-label {
+    cursor: pointer;
+    padding: 10px 30px;
+    color: var(--primary);
+    border: solid var(--primary) 2px;
+    transition: .3s;
+}
+
+    #image-select-label:hover {
+        color: #fc783f;
+        border-color: #fc783f;
+    }
+
+.image-control, .image-edit {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
 }
