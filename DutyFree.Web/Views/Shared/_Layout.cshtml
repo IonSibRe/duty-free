@@ -38,12 +38,6 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Security" asp-action="Index">Security</a>
                     </li>
-                    @if (User.IsInRole("1"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
-                        </li>
-                    }
                 </ul>
             </div>
             @if (User.Identity.IsAuthenticated) {
@@ -55,6 +49,10 @@
                             <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
                             <a class="nav-link" asp-area="" asp-controller="UserOrders" asp-action="Index">User Orders</a>
                             <a class="nav-link" asp-area="" asp-controller="Security" asp-action="Logout">Logout</a>
+                            @if (User.IsInRole("1"))
+                            {
+                                    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                            }
                         </div>
                     </div>
                     <img src="Images/defaultuser.jpg" class="nav-user-picture" id="nav-user-img">
