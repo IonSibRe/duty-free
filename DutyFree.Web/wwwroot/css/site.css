@@ -75,6 +75,10 @@ a {
     border-radius: 100%;
 }
 
+#nav-user-text {
+    color: white;
+}
+
 @media only screen and (max-width: 768px) {
     #links {
        display: none;
