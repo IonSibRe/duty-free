@@ -40,14 +40,17 @@ html {
 
 .home-banner-search-input {
     width: 100%;
-    padding: 0 0.25rem; 
+    font-size: 1rem;
+    padding: 0 0.25rem;
     outline: none;
     border: none;
 }
 
 .home-banner-search-btn {
     margin-left: 1rem;
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+    color: #fff;
     background-color: #ff6a00;
     border: none;
     outline: none;
@@ -143,17 +146,35 @@ html {
 @media only screen and (max-width: 1100px) {
     .home-banner-lower-text-wrap {
         width: 95%;
-        display: flex;
-        flex-direction: column;
-        text-align:center;
     }
 }
 
 @media only screen and (max-width: 768px) {
     .home-banner-inner {
         width: 80%;
+        padding-top: 7rem;
     }
     .home-showcase-grid-wrap {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .home-showcase-grid-item-title {
+        font-size: 1.5rem;
+    }
+
+    .home-banner-lower-text-wrap {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .home-banner-lower-text {
+        margin: 0.25rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .home-banner-inner {
+        width: 80%;
+        padding-top: 10rem;
     }
 }

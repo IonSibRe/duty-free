@@ -28,34 +28,29 @@
 </head>
 
 <body>
-    <header>
+    <header class="layout-header">
         <nav class="nav">
             <div class="nav-inner-wrap" id="myTopnav">
                 <a asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="/Images/logo.png" class="nav-logo"/>
                 </a>
-                <ul class="nav-list" id="links">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Security" asp-action="Index">Security</a>
-                    </li>
-                </ul>
             </div>
             @if (User.Identity.IsAuthenticated) {
                 <div class="nav-inner-wrap">
-                    <div class="dropdown()">
-                        <a onclick="dropdown()" class="dropbtn" id="nav-user-text"> 420 KČ kredit | Pepa Zdepa </a>
+                    <div class="dropdown">
+                        <a onclick="dropdown()" class="dropbtn">@User.FindFirst("Name").Value</a>
                         <div id="myDropdown" class="dropdown-content">
                             <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            <a asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                            <a asp-area="" asp-controller="UserOrders" asp-action="Index">User Orders</a>
-                            <a asp-area="" asp-controller="Security" asp-action="Logout">Logout</a>
+                            <a asp-area="" asp-controller="UserOrders" asp-action="Index">Orders</a>
+                            <a asp-area="" asp-controller="Security" asp-action="Index">Security</a>
                             @if (User.IsInRole("1"))
                             {
-                                    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                                    <a asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
                             }
+                            <a asp-area="" asp-controller="Security" asp-action="Logout">Logout</a>
                         </div>
                     </div>
-                    <img src="Images/defaultuser.jpg" class="nav-user-picture" id="nav-user-img">
+                    <img src="Images/defaultuser.jpg" class="nav-user-picture">
                 </div>
             }
         </nav>

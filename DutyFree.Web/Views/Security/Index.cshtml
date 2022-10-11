@@ -12,7 +12,7 @@
 
     table {
       width: 1100px;
-      margin-top: 2rem;
+      margin-top: 10rem;
       border-collapse: collapse;
     }
 
@@ -22,8 +22,8 @@
       padding: 8px;
     }
 
-    tr:nth-child(even) {
-      background-color: #dddddd;
+    .security-auth-btn {
+        color: #3399ff;
     }
 </style>
 
@@ -46,10 +46,10 @@
                 <td>@obj.Role</td>
                 <td>
                     @if (User.Identity.IsAuthenticated) {
-                        <a href="/Security/Logout">Odhlásit se</a>
+                        <a href="/Security/Logout" class="security-auth-btn">Odhlásit se</a>
                     }
                     else {
-                        <a href="/Security/Login?userId=@obj.UserId">Přihlásit se</a>
+                        <a href="/Security/Login?userId=@obj.UserId" class="security-auth-btn">Přihlásit se</a>
                     }
                 </td>
             </tr>
