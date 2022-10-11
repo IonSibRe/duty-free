@@ -9,6 +9,9 @@
     [Price]       INT            NOT NULL,
     [Quantity]    INT            NOT NULL,
     [ImageUrl]    NVARCHAR (MAX) NOT NULL,
+    [Discount] INT NULL, 
+    [CategoryName] NCHAR(10) NULL, 
+    [isNew] BIT NULL, 
     CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED ([ProductId] ASC)
 );
 

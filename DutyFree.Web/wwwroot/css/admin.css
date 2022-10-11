@@ -118,8 +118,7 @@ tr {
 }
 
     .add-row td {
-        padding: 5px 10px;
-        padding-bottom: 25px;
+        padding: 10px 10px;
     }
 
     .add-row label {
@@ -127,15 +126,22 @@ tr {
         font-weight: bold;
     }
 
-    .add-row input {
-        margin-right: 30px;
-    }
-
 .admin-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
 }
+
+    .admin-buttons input {
+        width: 100%;
+        border-radius: 5px 0px 0px 5px;
+    }
+
+    .admin-buttons button {
+        width: 100%;
+        border-radius: 0px 5px 5px 0px;
+    }
 
 
 
@@ -166,7 +172,7 @@ input[type=number]::-webkit-outer-spin-button {
 .btn-discard {
     background-color: white;
     color: #a1a1a1;
-    border: solid #a1a1a1 2px;
+    border: solid #a1a1a1 1px;
     border-radius: 5px;
     transition: .3s;
 }
@@ -174,7 +180,7 @@ input[type=number]::-webkit-outer-spin-button {
     .btn-discard:hover {
         background-color: #ededed;
         color: #a1a1a1;
-        border: solid #a1a1a1 2px;
+        border: solid #a1a1a1 1px;
     }
 
 #img-edit {
@@ -195,14 +201,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .image-add {
     display: flex;
-    position: relative;
     justify-content: center;
-    top: 32px;
 }
 
 #image-select-label {
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 7px 20px;
     font-weight: bold;
     color: var(--primary);
     border: solid var(--primary) 2px;
@@ -221,5 +225,37 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .product-add-extesion {
+    display: none;
+}
+
+.product-add-extesion td {
     padding: 5px 10px;
+    padding-bottom: 20px;
+}
+
+.checkbox-container {
+    text-align: center;
+}
+
+.discount-box {
+    align-items: center;
+    gap: 10px;
+}
+
+.discount-edit input{
+    margin: 0;
+}
+
+.form-check-input {
+    background-color: white;
+    border: solid 1px var(--primary);
+    height: 20px;
+    width: 20px;
+    transition: .3s;
+}
+
+.form-check-input:checked {
+    background-color: orangered;
+    border: solid 1px orangered;
+    border-radius: 3px;
 }
