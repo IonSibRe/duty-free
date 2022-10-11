@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace DutyFree.Web.Controllers
 {
@@ -41,8 +42,11 @@ namespace DutyFree.Web.Controllers
             };
 
             _db.Orders.Add(order);
-            _db.SaveChanges();
-            return RedirectToAction("Index", "UserOrders");
+            _db.Products.ToList().Find(x => x.ProductId == productId).Quantity -= 1;
+
+            await _db.SaveChangesAsync();
+
+            return View();
         }
 
         public IActionResult Privacy()

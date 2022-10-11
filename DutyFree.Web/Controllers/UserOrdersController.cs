@@ -24,13 +24,17 @@ namespace DutyFree.Web.Controllers
             return View(objOrderList);
         }
 
-        public IActionResult DeleteOrder(int productId)
+        public async Task<IActionResult> DeleteOrder(int productId)
         {
             var order = _db.Orders.Where(order => order.ProductId == productId).FirstOrDefault();
-            _db.Orders.Remove(order);
 
-            _db.SaveChanges();
-            return RedirectToAction("Index", "UserOrders");
+            _db.Orders.Remove(order);
+            _db.Products.ToList().Find(x => x.ProductId == productId).Quantity += 1;
+
+
+            _db.SaveChangesAsync();
+
+            return View();
         }
     }
 }

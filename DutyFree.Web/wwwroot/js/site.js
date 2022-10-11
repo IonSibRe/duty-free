@@ -175,3 +175,32 @@ $(document).on("input", ".image-edit", function () {
         reader.readAsDataURL(file);
     }
 });
+
+// Order Functions
+$(".home-showcase-grid-item-btn").click(function () {
+
+    var obj = $(this);
+    let id = obj.attr("id");
+
+    var stock = obj.parent().parent().find('h5');
+    let stockText = stock.text();
+
+    $.ajax({
+        type: "POST",
+        url: `/Home/AddOrder?productId=${id}`,
+    });
+
+    stock.text("Skladem: " + (+stockText.split(" ")[1] - 1) + " ks");
+});
+
+$(".orders-tabulka-button").click(function () {
+    let id = $(this).attr("id");
+
+    $.ajax({
+        type: "POST",
+        url: `/UserOrders/DeleteOrder?productId=${id}`
+    })
+})
+
+//href = "/Home/AddOrder?productId=@obj.ProductId"
+//href = "/UserOrders/DeleteOrder?productId=@obj.ProductId"

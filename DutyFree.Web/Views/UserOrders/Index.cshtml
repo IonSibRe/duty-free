@@ -1,29 +1,13 @@
 ﻿@model IEnumerable<Order>
+
 @{
+    int cenaCelkem = 0;
 }
 
 <head>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
-    <script>
-        function getFirstDayOfMonth() {
-            const now = new Date();
-            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-            return firstDay;
-        }
-
-
-        $(function () {
-            $("#datepicker-od").datepicker({
-            });
-            $("#datepicker-od").datepicker("setDate", getFirstDayOfMonth());
-
-            $("#datepicker-do").datepicker();
-            $("#datepicker-do").datepicker("setDate", "today");
-        });
-    </script>
-
+    <script src="/js/orders.js" defer></script>
 </head>
 
 <link rel="stylesheet" href="~/css/userOrders.css" asp-append-version="true" />
@@ -59,13 +43,20 @@
                     <th></th>
                 </tr>
                 @foreach(var obj in Model) {
-                    <tr>
-                        <td>@obj.DateCreated</td>
-                        <td>13:00</td>
+                    cenaCelkem += obj.Price;
+                    var date = obj.DateCreated.ToString("dd.MM.yyyy");
+                    var time = obj.DateCreated.ToString("HH:mm:ss");
+                    <tr class="orders-order-tr" data-price="@obj.Price">
+                        <td>@date</td>
+                        <td>@time</td>
                         <td>@obj.Name</td>
-                        <td>@obj.Price</td>
+                        <td>@obj.Price Kč</td>
                         <td>
-                            <a class="orders-tabulka-button" href="/UserOrders/DeleteOrder?productId=@obj.ProductId">❌</a>
+                            <button 
+                                class="orders-tabulka-button" 
+                                id=@obj.ProductId type="button">
+                                ❌
+                            </button>
                         </td>
                     </tr>
                 }
@@ -73,7 +64,7 @@
                     <td>Cena celkem:</td>
                     <td></td>
                     <td></td>
-                    <td>15 Kč</td>
+                    <td class="orders-total-td"></td>
                     <td></td>
                 </tr>
             </table>
@@ -81,6 +72,5 @@
         <div class="orders-export">
             <button class="orders-export-button" type"button">Export</button>
         </div>
-
     </section>
 </body>
