@@ -58,10 +58,10 @@
                 </div>
                 <div class ="home-showcase-grid-item-wrap">
                     <h3 class="home-showcase-grid-item-title">@obj.Name</h3>
-                    <h5 class="home-showcase-grid-item-stock">Skladem: @obj.Quantity Ks</h5>
+                    <h5 class="home-showcase-grid-item-stock" data-qty="@obj.Quantity">Skladem: @obj.Quantity Ks</h5>
                     <div class="home-showcase-grid-item-info-wrap">
                         <h4 class="home-showcase-grid-item-price">@obj.Price Kč</h4>
-                        <a class="home-showcase-grid-item-btn" href="/Home/AddOrder?productId=@obj.ProductId">Koupit</a>
+                        <button class="home-showcase-grid-item-btn" data-cena="@obj.Price" id="@obj.ProductId">Koupit</button>
                     </div>
                 </div>
             </div>
