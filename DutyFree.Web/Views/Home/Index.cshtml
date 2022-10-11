@@ -50,8 +50,10 @@
 <section class="home-showcase-wrap">
     <div class="home-showcase-grid-wrap">
         @foreach(var obj in Model) {
-            <div class="home-showcase-grid-item">
-                <div class="home-showcase-grid-item-wrap">
+            @if (!obj.isDeleted)
+            {
+                <div class="home-showcase-grid-item">
+                    <div class="home-showcase-grid-item-wrap">
                     <img src="@obj.ImageUrl" alt="Home Showcase Image" class="home-showcase-grid-item-img" />
                 </div>
                 <div class ="home-showcase-grid-item-wrap">
@@ -63,6 +65,7 @@
                     </div>
                 </div>
             </div>
+            }
         }
     </div>
 </section>

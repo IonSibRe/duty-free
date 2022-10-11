@@ -5,6 +5,7 @@ namespace DutyFree.Web.Models
 {
     public class Product
     {
+        [Key]
         public int ProductId { get; set; }
         [Display(Name = "Product")]
         public string? Name { get; set; }
@@ -13,6 +14,7 @@ namespace DutyFree.Web.Models
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public int CreatedBy { get; set; }
         public DateTime DateUpdated { get; set; }
+        public int UpdatedBy { get; set; }
         public bool isDeleted { get; set; }
         [Display(Name = "Available amount")]
         public int Quantity { get; set; }

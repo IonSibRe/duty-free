@@ -31,6 +31,17 @@ $(".admin-add-button").click(function () {
             + '<button type="button" class="btn btn-success btn-discard" onclick="removeRow()">Zahodit</button>'
             + '</td>'    
             + '</tr>'
+            + '<tr class="product-add-extesion">'
+            + '<td class="category-select">'
+            + '<select class="form-select">'
+            + '<option selected>Zvolte kategorii</option>'
+            + '<option value="1">#Svačina</option>'
+            + '<option value="2">#Sladké</option>'
+            + '<option value="3">#Slané</option>'
+            + '<option value="4">#Nápoje</option>'
+            + '<option value="5">#Zmrzlina</option>'
+            + '</select > '
+            + '</td>'
         );   
     }
 

@@ -20,7 +20,7 @@ namespace DutyFree.Web.Controllers
             var vm = new AdminViewModel();
             vm.Products = _db.Products.ToList();
 
-            return View(vm);
+            return View(vm.Products);
         }
 
         [HttpPost]
@@ -95,6 +95,8 @@ namespace DutyFree.Web.Controllers
             _db.Products.ToList().Find(x => x.ProductId == id).Name = name;
             _db.Products.ToList().Find(x => x.ProductId == id).Price = price;
             _db.Products.ToList().Find(x => x.ProductId == id).Quantity = qty;
+            _db.Products.ToList().Find(x => x.ProductId == id).DateUpdated = DateTime.Now;
+            _db.Products.ToList().Find(x => x.ProductId == id).UpdatedBy = 1;
 
             if (image != null)
             {
@@ -109,7 +111,8 @@ namespace DutyFree.Web.Controllers
         public IActionResult Delete(int id)
         {
             var item = _db.Products.Find(id);
-            _db.Products.Remove(item);
+            item.DateUpdated = DateTime.Now;
+            item.isDeleted = true;
             _db.SaveChanges();
 
             return RedirectToAction("Index", "Admin");

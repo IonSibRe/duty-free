@@ -33,23 +33,28 @@
                 <th>Available amount</th>
             </tr>
             
-            @foreach (var product in Model.Products)
+            @foreach (var product in Model)
             {
-                <tr class="admin-product" id="@product.ProductId">
-                    <td id="name">
+                @if (!product.isDeleted)
+                {
+                    <tr class="admin-product" id="@product.ProductId">
+                        <td id="name">
                         <p class="admin-product-name name">@product?.Name</p>
                         <p class="admin-product-description">#Svačina #Sleva #Novinka</p>
                     </td>
-                    <td id="image"><img class="image" src="@product?.ImageUrl" alt="produkt" /></td>
-                    <td class="cell-center" id="price"><span class="price">@product?.Price</span> Kč</td>
-                    <td class="cell-center" id="quantity"><span class="quantity">@product?.Quantity</span> ks</td>
-                    <td>
+                    <td id="image">
+                         <img class="image" src="@product?.ImageUrl" alt="produkt" />                 
+                    </td>
+                        <td id="price"><span class="price">@product?.Price</span> Kč</td>
+                        <td id="quantity"><span class="quantity">@product?.Quantity</span> ks</td>
+                        <td>
                         <div class="edit-delete-contaniner" id="buttons">
                             <a class="admin-edit-button"><i class="fa-solid fa-wrench"></i></a>
                             <a class="admin-delete-button"><i class="fa-solid fa-xmark"></i></a>
                         </div>
                     </td>
                 </tr>
+                }
             }
         </table>
     </section>
