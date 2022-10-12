@@ -32,5 +32,15 @@ namespace DutyFree.Web.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index", "UserOrders");
         }
+
+        public async Task<IActionResult> ShowTableAsync()
+        {
+            var user = await _db.Users.FindAsync(
+               int.Parse(User.FindFirst("UserId").Value)
+           );
+
+            IEnumerable<Order> objOrderList = _db.Orders.Where(order => order.UserId == user.UserId);        
+            return PartialView("UserOrdersTable", objOrderList);
+        }
     }
 }

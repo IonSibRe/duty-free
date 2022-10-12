@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<Order>
 @{
+    DateTime now = DateTime.Now;
+    string dateFrom = "dateFrom";
+    string dateTo = "dateTo";
+    string dateFromISO = "dateFromISO";
+    string dateToISO = "dateToISO";
+    int total = 0;
 }
 
 <head>
@@ -7,23 +13,98 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <script>
+
         function getFirstDayOfMonth() {
             const now = new Date();
             const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
             return firstDay;
         }
 
+        function GetISODate(date) {
+            var day = date.getDate();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+            var time = day + "/" + month + "/" + year;
+            return time;
+        }
+
+        function CreateOrdersJS() {
+            foreach
+        }
+
+        /* Updating date variables */
+        function UpdateDates(){
+            var dateFromObj = $("#datepicker-od").datepicker("getDate");
+            @dateFrom = dateFromObj;
+            @dateFromISO = GetISODate(dateFromObj);
+
+            var dateToObj = $("#datepicker-do").datepicker("getDate");
+            @dateTo = dateToObj;
+            @dateToISO = GetISODate(dateToObj);
+        }
+
+        /* Switching of dates */
+        function SwitchDates(dateToObjVAR, dateFromObjVAR) {
+            console.log("DateTo is smaller than DateFrom!");
+
+            $("#datepicker-od").datepicker("setDate", new Date(dateToObjVAR.getFullYear(), dateToObjVAR.getMonth(), dateToObjVAR.getDate()));
+            $("#datepicker-do").datepicker("setDate", new Date(dateFromObjVAR.getFullYear(), dateFromObjVAR.getMonth(), dateFromObjVAR.getDate()));
+
+            UpdateDates();
+
+            console.log("DateFrom is now: " + @dateFrom);
+            console.log("DateTo is now: " + @dateTo);
+        }
 
         $(function () {
-            $("#datepicker-od").datepicker({
-            });
+            /* Initialization of datepickers */
+            $("#datepicker-od").datepicker();
             $("#datepicker-od").datepicker("setDate", getFirstDayOfMonth());
 
             $("#datepicker-do").datepicker();
             $("#datepicker-do").datepicker("setDate", "today");
+
+            UpdateDates();
+
+            console.log("DateFrom is now: " + @dateFrom);
+            console.log("DateTo is now: " + @dateTo);
+
+            /* onChange event of datepickers */
+            $("#datepicker-od").datepicker({
+            })
+                .on("change", function () {
+                    dateFromObj = $("#datepicker-od").datepicker("getDate");
+                    @dateFrom = dateFromObj;
+                    dateToObj = $("#datepicker-do").datepicker("getDate");
+                    @dateTo = dateToObj;
+                    @dateFromISO = GetISODate(dateFromObj);
+                    @dateToISO = GetISODate(dateToObj);
+
+                    if (dateToObj < dateFromObj) {
+                        SwitchDates(dateToObj, dateFromObj);
+                    } else {
+                        console.log("DateFrom is now: " + @dateFrom);
+                    }
+                });
+
+            $("#datepicker-do").datepicker({
+            })
+                .on("change", function () {
+                    dateToObj = $("#datepicker-do").datepicker("getDate");
+                    @dateTo = dateToObj();
+                    dateFromObj = $("#datepicker-od").datepicker("getDate");
+                    @dateFrom = dateFromObj;
+                    @dateFromISO = GetISODate(dateFromObj);
+                    @dateToISO = GetISODate(dateToObj);
+                 
+                    if (dateToObj < dateFromObj){
+                        SwitchDates(dateToObj, dateFromObj);
+                    }else{
+                        console.log("DateTo is now: " + @dateTo);
+                    }
+                });
         });
     </script>
-
 </head>
 
 <link rel="stylesheet" href="~/css/userOrders.css" asp-append-version="true" />
@@ -50,33 +131,7 @@
         </div>
 
         <div class="orders-tabulka">
-            <table>
-                <tr>
-                    <th>Datum</th>
-                    <th>Čas</th>
-                    <th>Produkt</th>
-                    <th>Cena</th>
-                    <th></th>
-                </tr>
-                @foreach(var obj in Model) {
-                    <tr>
-                        <td>@obj.DateCreated</td>
-                        <td>13:00</td>
-                        <td>@obj.Name</td>
-                        <td>@obj.Price</td>
-                        <td>
-                            <a class="orders-tabulka-button" href="/UserOrders/DeleteOrder?productId=@obj.ProductId">❌</a>
-                        </td>
-                    </tr>
-                }
-                <tr class="orders-total">
-                    <td>Cena celkem:</td>
-                    <td></td>
-                    <td></td>
-                    <td>15 Kč</td>
-                    <td></td>
-                </tr>
-            </table>
+            @Html.Partial("UserOrdersTable")
         </div>
         <div class="orders-export">
             <button class="orders-export-button" type"button">Export</button>
