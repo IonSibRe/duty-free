@@ -11,14 +11,17 @@ namespace DutyFree.Web.Models
         public string? Name { get; set; }
         [Display(Name = "Price")]
         public int Price { get; set; }
+        public int Discount { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public int CreatedBy { get; set; }
         public DateTime DateUpdated { get; set; }
         public int UpdatedBy { get; set; }
         public bool isDeleted { get; set; }
+        public bool isNew { get; set; }
         [Display(Name = "Available amount")]
         public int Quantity { get; set; }
         public string? ImageUrl { get; set; }
+        public string? CategoryName { get; set; }
         //[Required(ErrorMessage = "Please select file")]
         //public IFormFile? Image { get; set; }
     }
