@@ -24,9 +24,10 @@ namespace DutyFree.Web.Controllers
             return View(objOrderList);
         }
 
-        public async Task<IActionResult> DeleteOrder(int productId)
+        public async Task<IActionResult> DeleteOrder(int orderId, int productId)
         {
-            var order = _db.Orders.Where(order => order.ProductId == productId).FirstOrDefault();
+
+            var order = _db.Orders.Where(order => order.OrderId == orderId).FirstOrDefault();
 
             _db.Orders.Remove(order);
             _db.Products.ToList().Find(x => x.ProductId == productId).Quantity += 1;

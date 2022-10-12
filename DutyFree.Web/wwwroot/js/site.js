@@ -177,6 +177,8 @@ $(document).on("input", ".image-edit", function () {
 });
 
 // Order Functions
+
+// Add Order
 $(".home-showcase-grid-item-btn").click(function () {
 
     var obj = $(this);
@@ -193,14 +195,43 @@ $(".home-showcase-grid-item-btn").click(function () {
     stock.text("Skladem: " + (+stockText.split(" ")[1] - 1) + " ks");
 });
 
+// Remove Order
 $(".orders-tabulka-button").click(function () {
     let id = $(this).attr("id");
+    let productId = $(this).attr("data-productId");
 
     $.ajax({
         type: "POST",
-        url: `/UserOrders/DeleteOrder?productId=${id}`
+        url: `/UserOrders/DeleteOrder?orderId=${id}&productId=${productId}`
     })
 })
 
-//href = "/Home/AddOrder?productId=@obj.ProductId"
-//href = "/UserOrders/DeleteOrder?productId=@obj.ProductId"
+
+// Filter Products
+const homeBannerSearchInput = document.querySelector(".home-banner-search-input");
+let products = document.querySelectorAll(".home-showcase-grid-item");
+
+homeBannerSearchInput.addEventListener("input", (e) => {
+    let inputValue = e.target.value.toLowerCase();
+
+
+    if (!inputValue.trim()) {
+        products.forEach(product => {
+            if (product.classList.contains("hide-product")) {
+                product.classList.remove("hide-product");
+            }
+        })
+    } else {
+        products.forEach(product => {
+            if (product.children[1].children[0].textContent.toLowerCase().includes(inputValue)) {
+                if (product.classList.contains("hide-product")) {
+                    product.classList.remove("hide-product");
+                }
+            } else {
+                if (!product.classList.contains("hide-product")) {
+                    product.classList.add("hide-product");
+                }
+            }
+        })
+    }
+})

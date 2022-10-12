@@ -54,7 +54,10 @@
                         <td>
                             <button 
                                 class="orders-tabulka-button" 
-                                id=@obj.ProductId type="button">
+                                id=@obj.OrderId 
+                                data-productId=@obj.ProductId
+                                type="button"
+                            >
                                 ❌
                             </button>
                         </td>

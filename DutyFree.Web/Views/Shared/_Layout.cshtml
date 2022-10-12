@@ -50,7 +50,7 @@
                             <a asp-area="" asp-controller="Security" asp-action="Logout">Logout</a>
                         </div>
                     </div>
-                    <img src="Images/defaultuser.jpg" class="nav-user-picture">
+                    <img src="@User.FindFirst("ImageUrl").Value" class="nav-user-picture">
                 </div>
             }
         </nav>
