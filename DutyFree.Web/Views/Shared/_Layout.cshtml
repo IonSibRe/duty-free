@@ -65,8 +65,8 @@
     <script src="~/lib/jquery/dist/jquery-ui.js"></script>
     <script src="~/lib/jquery/dist/jquery-ui-cz.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <footer>
+        <span>© @(DateTime.Now.Year)  Business Logic s.r.o</span>
+    </footer>
 </body>
-@*<footer>
-    <span>© @(DateTime.Now.Year)  Business Logic s.r.o</span>
-</footer>*@
 </html>

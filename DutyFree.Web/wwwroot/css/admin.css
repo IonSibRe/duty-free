@@ -59,6 +59,10 @@ ul {
             color: var(--primary);
         }
 
+.admin-table-section {
+    padding-bottom: 60px;
+}
+
 table {
     width: 100%;
 }
@@ -258,6 +262,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 900px) {
+    .admin-table-section {
+        padding-bottom: 50px;
+    }
     .admin-content-section {
         width: 90%;
     }

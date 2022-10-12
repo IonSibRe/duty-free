@@ -99,7 +99,7 @@ $(document).on("click", ".admin-edit-button", function () {
     if (!rowExists) {
 
         row.find("#name").each(function () {
-            var input = $('<input class="name-edit form-control" type="text" name="Name" form="edit" value="' + `${name}` + '" />');
+            var input = $('<input class="name-edit form-control" type="text" name="Name" form="edit" value="' + `${name}` + '" required/>');
             $(this).html(input);
         });
 
@@ -117,15 +117,15 @@ $(document).on("click", ".admin-edit-button", function () {
             $(this).empty();
             if (priceAfter == 0) {
                 $(this).prepend(
-                    '<input type="number" class="form-control price-edit" name="Price" form="edit" value="' + `${price}` + '"/>'
+                    '<input type="number" class="form-control price-edit" name="Price" form="edit" value="' + `${price}` + '" required/>'
                 );
             }
             else {
                 $(this).prepend(
                     '<div class="input-group discount-edit" style="align-items: center; gap: 10px;">'
-                    + '<input type="number" id="price-before" name="Price" form="edit" value="' + `${price}` + '" class="form-control"/>'
+                    + '<input type="number" id="price-before" name="Price" form="edit" value="' + `${price}` + '" class="form-control" required/>'
                     + '<span><i class="fa-solid fa-arrow-right"></i></span>'
-                    + '<input type="number" id="price-after" name="Price-After" form="edit" value="' + `${priceAfter}` + '" class="form-control"/>'
+                    + '<input type="number" id="price-after" name="Price-After" form="edit" value="' + `${priceAfter}` + '" class="form-control" required/>'
                     + ' Kč</div>'
                 );  
             }
@@ -134,7 +134,7 @@ $(document).on("click", ".admin-edit-button", function () {
         row.find("#quantity").each(function () {
             $(this).empty();
             $(this).prepend(
-                '<input type="number" class="form-control quantity-edit" name="Quantity" form="edit" value="' + `${quantity}` + '"/>'
+                '<input type="number" class="form-control quantity-edit" name="Quantity" form="edit" value="' + `${quantity}` + '" required/>'
             );
         });
 
@@ -156,7 +156,7 @@ $(document).on("click", ".throwAway", function () {
         $(this).empty();
         $(this).prepend(
             '<p class="admin-product-name name">' + `${name}` + '</p>'
-            + '<p class="admin-product-description">' + `${category}` + '</p>'
+            + '<p class="admin-product-description description">' + `${category}` + '</p>'
         );
     });
 

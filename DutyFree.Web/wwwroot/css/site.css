@@ -117,6 +117,9 @@ footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }
 
 @media screen and (max-width: 550px) {
