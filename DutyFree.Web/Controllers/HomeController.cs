@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace DutyFree.Web.Controllers
 {
@@ -24,6 +25,14 @@ namespace DutyFree.Web.Controllers
         public IActionResult Index()
         {
             IEnumerable <Product> objProductList = _db.Products.ToList();
+
+            List<string> categories = new List<string>();
+            foreach(Category category in _db.Categories)
+            {
+                categories.Add(category.CategoryName);
+            }
+
+            ViewData["Categories"] = categories;
             return View(objProductList);
         }
         public async Task<IActionResult> AddOrder(int productId)
@@ -41,8 +50,11 @@ namespace DutyFree.Web.Controllers
             };
 
             _db.Orders.Add(order);
-            _db.SaveChanges();
-            return RedirectToAction("Index", "UserOrders");
+            _db.Products.ToList().Find(x => x.ProductId == productId).Quantity -= 1;
+
+            await _db.SaveChangesAsync();
+
+            return View();
         }
 
         public IActionResult Privacy()

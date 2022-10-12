@@ -1,6 +1,7 @@
 ﻿@using DutyFree.Web.Models.Products
 @{
     ViewData["Title"] = "Administration";
+    List<string> categories = (List<string>)ViewData["Categories"];
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
@@ -26,36 +27,87 @@
     <section class="admin-table-section">
         @using (Html.BeginForm("Insert", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "insert" })) {}
         @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "edit" })) {}
-        <table>
-             <tr>
-                <th style="width: 50%;" colspan="2">Product</th>
-                <th>Price</th>
-                <th>Available amount</th>
-            </tr>
-            
-            @foreach (var product in Model)
-            {
-                @if (!product.isDeleted)
-                {
-                    <tr class="admin-product" id="@product.ProductId">
-                        <td id="name">
-                        <p class="admin-product-name name">@product?.Name</p>
-                        <p class="admin-product-description">#Svačina #Sleva #Novinka</p>
-                    </td>
-                    <td id="image">
-                         <img class="image" src="@product?.ImageUrl" alt="produkt" />                 
-                    </td>
-                        <td id="price"><span class="price">@product?.Price</span> Kč</td>
-                        <td id="quantity"><span class="quantity">@product?.Quantity</span> ks</td>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%;" colspan="2">Produkt</th>
+                        <th>Cena za ks</th>
+                        <th>Aktuální množství</th>
+                    </tr>
+                </thead>
+             
+                <tbody>
+                    <tr class="product-add-extesion">
+                        <td class="category-select">
+                            <select class="form-select" id="Category" name="Category" form="insert">
+                                <option selected for="Category">Zvolte kategorii</option>
+                                @foreach (string category in categories)
+                                {
+                                    <option value="@category" for="Category">#@category</option>
+                                }
+                            </select>
+                        </td>
+                        <td class="checkbox-container">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input new-checkbox" name="New" form="insert" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">Novinka</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input discount-checkbox" name="Discount" form="insert" type="checkbox" value="" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">Sleva</label>
+                            </div>   
+                        </td>
                         <td>
-                        <div class="edit-delete-contaniner" id="buttons">
-                            <a class="admin-edit-button"><i class="fa-solid fa-wrench"></i></a>
-                            <a class="admin-delete-button"><i class="fa-solid fa-xmark"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="admin-buttons">
+                            <input type="submit" class="btn btn-success btn-save" value="Uložit" form="insert" />
+                            <button type="button" class="btn btn-success btn-discard" onclick="removeRow()">Zahodit</button>
+                        
+                        </td>
+                    </tr>
+                    @foreach (var product in Model)
+                    {
+                    @if (!product.isDeleted)
+                    {
+                        <tr class="admin-product" id="@product.ProductId">
+                            <td id="name">
+                            <p class="admin-product-name name">@product?.Name</p>
+                                    <p class="admin-product-description description">
+                                        #@product?.CategoryName 
+                                        @if (product?.Discount > 0) { <span>#Sleva</span> }
+                                        @if (product?.isNew) { <span>#Novinka</span> }
+                                    </p>
+                                </td>
+                        <td id="image">
+                             <img class="image" src="@product?.ImageUrl" alt="produkt" />                 
+                        </td>
+                            <td id="price">
+                                @if(@product?.Discount == 0)
+                                {
+                                     <span class="price" id="real-price">@product?.Price</span>
+                                        <span>Kč</span>
+                                } 
+                                else
+                                {
+                                    <span class="price" id="real-price"><strike>@product?.Price</strike></span>
+                                        <span><strike>Kč</strike></span>
+                                    <span class="price" id="discount-price">@product?.Discount</span>
+                                        <span>Kč</span>
+                                }
+                            </td>
+                            <td id="quantity"><span class="quantity">@product?.Quantity</span> ks</td>
+                            <td>
+                            <div class="edit-delete-contaniner" id="buttons">
+                                <a class="admin-edit-button"><i class="fa-solid fa-wrench"></i></a>
+                                <a class="admin-delete-button"><i class="fa-solid fa-xmark"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
                 }
-            }
-        </table>
+                </tbody>
+            </table>
+        </div>
     </section>
 </section>

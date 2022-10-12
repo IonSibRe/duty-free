@@ -8,51 +8,66 @@ var rowExists = false;
 $(".admin-add-button").click(function () {
     if (!rowExists) {
         const table = $('table tbody');
+
         table.prepend(
             '<tr class="add-row">'
             + '<td class="name">'
-            + '<label for="name">Name</label>'
             + '<input type="text" class="form-control name-control" name="Name" form="insert" required/>'
             + '</td>'
             + '<td class="image image-add">'
             + '<label for="Image" id="image-select-label">Vybrat soubor</label>'
-            + '<input type="file" class="form-control image-control" id="Image" name="Image" form="insert" accept=".png, .jpg"/>'
+            + '<input type="file" class="form-control image-control" id="Image" name="Image" form="insert" accept=".png, .jpg" required/>'
             + '</td>'
-            + '<td class="price">'
-            + '<label for="Price">Price</label>'
+            + '<td class="price" id="price-control">'
             + '<input type="number" class="form-control price-control" name="Price" form="insert" required/>'
             + '</td>'
-            + '<td class="quantity">'
-            + '<label for="Quantity">Quantity</label>'
+            + '<td class="quantity" colspan="2">'
             + '<input type="number" class="form-control quantity-control" name="Quantity" form="insert" required/>'
-            + '</td>'
-            + '<td class="admin-buttons">'
-            + '<input type="submit" class="btn btn-success btn-save" value="Uložit" form="insert" style="width:100%"/>'
-            + '<button type="button" class="btn btn-success btn-discard" onclick="removeRow()">Zahodit</button>'
-            + '</td>'    
+            + '</td>' 
             + '</tr>'
-            + '<tr class="product-add-extesion">'
-            + '<td class="category-select">'
-            + '<select class="form-select">'
-            + '<option selected>Zvolte kategorii</option>'
-            + '<option value="1">#Svačina</option>'
-            + '<option value="2">#Sladké</option>'
-            + '<option value="3">#Slané</option>'
-            + '<option value="4">#Nápoje</option>'
-            + '<option value="5">#Zmrzlina</option>'
-            + '</select > '
-            + '</td>'
         );   
-    }
 
-    $(".admin-add-button").hide();
+        $(".product-add-extesion").show();
+    }
 
     rowExists = true;
 });
 
+$(document).on("change", ".discount-checkbox", function () {
+    const extensionRow = $(document).find("#price-control");
+    if (this.checked) {       
+        extensionRow.empty();
+        extensionRow.prepend(
+            '<div class="input-group discount-edit" style="align-items: center; gap: 10px;">'
+            + '<input type="number" id="price-before" name="Price" form="insert" class="form-control"/>'
+            + '<span><i class="fa-solid fa-arrow-right"></i></span>'
+            + '<input type="number" id="price-after" name="Price-After" form="insert" value="0" class="form-control"/>'
+            + '</div>'
+        );
+    }
+
+    else {
+        extensionRow.empty();
+        extensionRow.prepend(
+            '<input type="number" class="form-control price-control" name="Price" form="insert" required/>'
+        );
+    }
+});
+
+$(document).on("change", ".new-checkbox", function () {
+    if (this.checked) {
+        this.value = true;
+    }
+    else {
+        this.value = false;
+    }
+
+    console.log(this.value);
+});
+
 function removeRow() {
     $(".add-row").remove();
-    $(".admin-add-button").show();
+    $(".product-add-extesion").hide();
     rowExists = false;
 }
 
@@ -68,21 +83,23 @@ $(".admin-delete-button").click(function () {
     $(this).closest('tr').remove();
 });
 
-let name, price, quantity, imageUrl, productId;
+let name, price, quantity, imageUrl, productId, priceAfter = 0, category;
 
 $(document).on("click", ".admin-edit-button", function () {
     const row = $(this).closest('tr');
 
     name = row.find('.name').text(),
-    price = row.find('.price').text(),
+    price = row.find('#real-price').text(),
     quantity = row.find('.quantity').text(),
     imageUrl = row.find('.image')[0].src;
     productId = row.attr("id");
+    priceAfter = row.find('#discount-price').text();
+    category = row.find('.description').text();
 
     if (!rowExists) {
 
         row.find("#name").each(function () {
-            var input = $('<input class="name-edit form-control" type="text" name="Name" form="edit" value="' + `${name}` + '" />');
+            var input = $('<input class="name-edit form-control" type="text" name="Name" form="edit" value="' + `${name}` + '" required/>');
             $(this).html(input);
         });
 
@@ -98,15 +115,26 @@ $(document).on("click", ".admin-edit-button", function () {
 
         row.find("#price").each(function () {
             $(this).empty();
-            $(this).prepend(
-                '<input type="number" class="form-control price-edit" name="Price" form="edit" value="' + `${price}` + '"/>'
-            );
+            if (priceAfter == 0) {
+                $(this).prepend(
+                    '<input type="number" class="form-control price-edit" name="Price" form="edit" value="' + `${price}` + '" required/>'
+                );
+            }
+            else {
+                $(this).prepend(
+                    '<div class="input-group discount-edit" style="align-items: center; gap: 10px;">'
+                    + '<input type="number" id="price-before" name="Price" form="edit" value="' + `${price}` + '" class="form-control" required/>'
+                    + '<span><i class="fa-solid fa-arrow-right"></i></span>'
+                    + '<input type="number" id="price-after" name="Price-After" form="edit" value="' + `${priceAfter}` + '" class="form-control" required/>'
+                    + ' Kč</div>'
+                );  
+            }
         });
 
         row.find("#quantity").each(function () {
             $(this).empty();
             $(this).prepend(
-                '<input type="number" class="form-control quantity-edit" name="Quantity" form="edit" value="' + `${quantity}` + '"/>'
+                '<input type="number" class="form-control quantity-edit" name="Quantity" form="edit" value="' + `${quantity}` + '" required/>'
             );
         });
 
@@ -128,7 +156,7 @@ $(document).on("click", ".throwAway", function () {
         $(this).empty();
         $(this).prepend(
             '<p class="admin-product-name name">' + `${name}` + '</p>'
-            + '<p class="admin-product-description">#Svačina #Sleva #Novinka</p>'
+            + '<p class="admin-product-description description">' + `${category}` + '</p>'
         );
     });
 
@@ -141,15 +169,27 @@ $(document).on("click", ".throwAway", function () {
 
     row.find("#price").each(function () {
         $(this).empty();
-        $(this).prepend(
-            '<span class="price">' + `${price}` + '</span> Kč'
-        );
+        if (priceAfter == 0) {
+            $(this).prepend(
+                '<span class="price" id="real-price">' + `${price}` + '</span>'
+                + '<span> Kč</span>'
+            );
+        }
+        else {
+            $(this).prepend(
+                '<span class="price" id="real-price"><strike>' + `${price}` + '</strike></span>'
+                + '<span><strike> Kč </strike></span>'
+                + '<span class="price" id="discount-price">' + `${priceAfter}` + '</span>'
+                + '<span> Kč</span>'
+            );
+        }
     });
 
     row.find("#quantity").each(function () {
+        row.find("#quantity").css("display", "");
         $(this).empty();
         $(this).prepend(
-            '<span class="price">' + `${quantity}` + '</span> ks'
+            '<span class="quantity">' + `${quantity}` + '</span> ks'
         );
     });
 
@@ -175,3 +215,67 @@ $(document).on("input", ".image-edit", function () {
         reader.readAsDataURL(file);
     }
 });
+
+// Order Functions
+
+// Add Order
+$(".home-showcase-grid-item-btn").click(function () {
+
+    var obj = $(this);
+    let id = obj.attr("id");
+
+    var stock = obj.parent().parent().find('h5');
+    let stockText = stock.text();
+
+    $.ajax({
+        type: "POST",
+        url: `/Home/AddOrder?productId=${id}`,
+    });
+
+    stock.text("Skladem: " + (+stockText.trim().split(" ")[1] - 1) + " ks");
+});
+
+// Remove Order
+$(".orders-tabulka-button").click(function () {
+    let id = $(this).attr("id");
+    let productId = $(this).attr("data-productId");
+
+    $.ajax({
+        type: "POST",
+        url: `/UserOrders/DeleteOrder?orderId=${id}&productId=${productId}`
+    })
+})
+
+
+// Filter Products
+const homeBannerSearchInput = document.querySelector(".home-banner-search-input");
+let products = document.querySelectorAll(".home-showcase-grid-item");
+
+homeBannerSearchInput.addEventListener("input", (e) => {
+    let inputValue = e.target.value.toLowerCase();
+    console.log(inputValue);
+
+    if (!inputValue.trim()) {
+        products.forEach(product => {
+            if (product.classList.contains("hide-product")) {
+                product.classList.remove("hide-product");
+            }
+        })
+    } else {
+        products.forEach(product => {
+            let correctChildIndex = 1;
+
+            product.children[2] ? correctChildIndex = 2 : correctChildIndex = 1;
+
+            if (product.children[correctChildIndex].children[0].textContent.toLowerCase().includes(inputValue)) {
+                if (product.classList.contains("hide-product")) {
+                    product.classList.remove("hide-product");
+                }
+            } else {
+                if (!product.classList.contains("hide-product")) {
+                    product.classList.add("hide-product");
+                }
+            }
+        })
+    }
+})

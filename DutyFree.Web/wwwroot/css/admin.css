@@ -59,6 +59,10 @@ ul {
             color: var(--primary);
         }
 
+.admin-table-section {
+    padding-bottom: 60px;
+}
+
 table {
     width: 100%;
 }
@@ -74,10 +78,6 @@ th {
 
 tr {
     border-bottom: solid lightgray 2px;
-}
-
-.cell-center {
-    text-align: center;
 }
 
 .admin-product td{
@@ -118,8 +118,7 @@ tr {
 }
 
     .add-row td {
-        padding: 5px 10px;
-        padding-bottom: 25px;
+        padding: 10px 10px;
     }
 
     .add-row label {
@@ -127,15 +126,22 @@ tr {
         font-weight: bold;
     }
 
-    .add-row input {
-        margin-right: 30px;
-    }
-
 .admin-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
 }
+
+    .admin-buttons input {
+        width: 100%;
+        border-radius: 5px 0px 0px 5px;
+    }
+
+    .admin-buttons button {
+        width: 100%;
+        border-radius: 0px 5px 5px 0px;
+    }
 
 
 
@@ -166,7 +172,7 @@ input[type=number]::-webkit-outer-spin-button {
 .btn-discard {
     background-color: white;
     color: #a1a1a1;
-    border: solid #a1a1a1 2px;
+    border: solid #a1a1a1 1px;
     border-radius: 5px;
     transition: .3s;
 }
@@ -174,7 +180,7 @@ input[type=number]::-webkit-outer-spin-button {
     .btn-discard:hover {
         background-color: #ededed;
         color: #a1a1a1;
-        border: solid #a1a1a1 2px;
+        border: solid #a1a1a1 1px;
     }
 
 #img-edit {
@@ -195,14 +201,13 @@ input[type=number]::-webkit-outer-spin-button {
 
 .image-add {
     display: flex;
-    position: relative;
     justify-content: center;
-    top: 32px;
 }
 
 #image-select-label {
     cursor: pointer;
-    padding: 10px 20px;
+    text-align: center;
+    padding: 7px 20px;
     font-weight: bold;
     color: var(--primary);
     border: solid var(--primary) 2px;
@@ -221,5 +226,120 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .product-add-extesion {
+    display: none;
+}
+
+.product-add-extesion td {
     padding: 5px 10px;
+    padding-bottom: 20px;
+}
+
+.checkbox-container {
+    text-align: center;
+}
+
+.discount-box {
+    align-items: center;
+    gap: 10px;
+}
+
+.discount-edit input{
+    margin: 0;
+}
+
+.form-check-input {
+    background-color: white;
+    border: solid 1px var(--primary);
+    height: 20px;
+    width: 20px;
+    transition: .3s;
+}
+
+.form-check-input:checked {
+    background-color: orangered;
+    border: solid 1px orangered;
+    border-radius: 3px;
+}
+
+@media only screen and (max-width: 900px) {
+    .admin-table-section {
+        padding-bottom: 50px;
+    }
+    .admin-content-section {
+        width: 90%;
+    }
+    table img {
+        width: 40px;
+    }
+
+    th {
+        font-size: 13px;
+    }
+
+    .admin-product td {
+        padding: 5px 15px;
+        min-width: 75px;
+    }
+
+    .edit-delete-contaniner {
+        gap: 0px;
+    }
+
+    .add-row {
+        font-size: 13px;
+    }
+
+        .add-row td {
+            padding: 10px 5px;
+        }
+
+        .add-row td input {
+            width: 120px;
+        }
+
+    #image-select-label {
+        padding: 7px 10px;
+        font-size: 13px;
+        width: 120px;    
+    }
+
+    .product-add-extesion {
+        font-size: 13px;
+    }
+
+        .product-add-extesion td {
+            padding: 5px 5px;
+        }
+
+        .product-add-extesion select {
+            width: 100px;
+            font-size: 13px;
+        }
+
+        .product-add-extesion input {
+            font-size: 13px;
+        }
+
+        .product-add-extesion button {
+            font-size: 13px;
+        }
+
+    .discount-edit {
+        justify-content: center;
+        width: 150px;
+    }
+
+    .discount-edit input {
+        width: 50px !important;
+        border-radius: 3px !important;
+    }
+
+    .checkbox-container {
+        text-align: left;
+    }
+
+    .new-checkbox, .discount-checkbox {
+        height: 15px;
+        width: 15px;
+    }
 }
