@@ -232,7 +232,7 @@ $(".home-showcase-grid-item-btn").click(function () {
         url: `/Home/AddOrder?productId=${id}`,
     });
 
-    stock.text("Skladem: " + (+stockText.split(" ")[1] - 1) + " ks");
+    stock.text("Skladem: " + (+stockText.trim().split(" ")[1] - 1) + " ks");
 });
 
 // Remove Order
@@ -253,7 +253,7 @@ let products = document.querySelectorAll(".home-showcase-grid-item");
 
 homeBannerSearchInput.addEventListener("input", (e) => {
     let inputValue = e.target.value.toLowerCase();
-
+    console.log(inputValue);
 
     if (!inputValue.trim()) {
         products.forEach(product => {
@@ -263,7 +263,11 @@ homeBannerSearchInput.addEventListener("input", (e) => {
         })
     } else {
         products.forEach(product => {
-            if (product.children[1].children[0].textContent.toLowerCase().includes(inputValue)) {
+            let correctChildIndex = 1;
+
+            product.children[2] ? correctChildIndex = 2 : correctChildIndex = 1;
+
+            if (product.children[correctChildIndex].children[0].textContent.toLowerCase().includes(inputValue)) {
                 if (product.classList.contains("hide-product")) {
                     product.classList.remove("hide-product");
                 }

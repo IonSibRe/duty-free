@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Home Page";
+    List<string> categories = (List<string>)ViewData["Categories"];
 }
 
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
@@ -15,33 +16,11 @@
             </form>
         </div>
         <div class="home-banner-lower-text-wrap">
-            <p class="home-banner-lower-text">
-                #MojeOblíbené
-            </p>
-            <p class="home-banner-lower-text">
-                #OblíbenéOstatních
-            </p>
-            <p class="home-banner-lower-text">
-                #Sleva
-            </p>
-            <p class="home-banner-lower-text">
-                #Novinka
-            </p>
-            <p class="home-banner-lower-text">
-                #Svačina
-            </p>
-            <p class="home-banner-lower-text">
-                #Sladké
-            </p>
-            <p class="home-banner-lower-text">
-                #Slané
-            </p>
-            <p class="home-banner-lower-text">
-                #Nápoje
-            </p>
-            <p class="home-banner-lower-text">
-                #Zmrzlina
-            </p>
+            @foreach(var category in categories) {
+                <p class="home-banner-lower-text">
+                    #@category
+                </p>
+            }
         </div>
     </div>
 </section>
@@ -50,21 +29,70 @@
 <section class="home-showcase-wrap">
     <div class="home-showcase-grid-wrap">
         @foreach(var obj in Model) {
-            @if (!obj.isDeleted)
-            {
+            @if (!obj.isDeleted) {
+                double discountDisplay = 100 - (((double)obj.Discount / (double)obj.Price) * 100);
                 <div class="home-showcase-grid-item">
-                    <div class="home-showcase-grid-item-wrap">
-                    <img src="@obj.ImageUrl" alt="Home Showcase Image" class="home-showcase-grid-item-img" />
-                </div>
-                <div class ="home-showcase-grid-item-wrap">
-                    <h3 class="home-showcase-grid-item-title">@obj.Name</h3>
-                    <h5 class="home-showcase-grid-item-stock" data-qty="@obj.Quantity">Skladem: @obj.Quantity Ks</h5>
-                    <div class="home-showcase-grid-item-info-wrap">
-                        <h4 class="home-showcase-grid-item-price">@obj.Price Kč</h4>
-                        <button class="home-showcase-grid-item-btn" data-cena="@obj.Price" id="@obj.ProductId">Koupit</button>
+                    @if (obj.isNew || obj.Discount > 0) {
+                        <div class="home-showcase-grid-item-span-wrap">
+                            @if (obj.isNew) {
+                                <span 
+                                    class="home-showcase-grid-item-span home-showcase-grid-item-span-new">
+                                    New
+                                </span>
+                            }
+                            @if (obj.Discount > 0) {
+                                @if (discountDisplay > 0) {
+                                    <span class="home-showcase-grid-item-span home-showcase-grid-item-span-discount">
+                                            -@discountDisplay%
+                                            
+                                    </span>
+                                } else {
+                                    discountDisplay *= -1;
+                                    <span class="home-showcase-grid-item-span home-showcase-grid-item-span-discount" >
+                                            +@discountDisplay%
+                                    </span>
+                                }
+                            }
+                        </div>
+                    }
+                    <div class="home-showcase-grid-item-wrap home-showcase-grid-item-img-wrap">
+                        <img 
+                            src="@obj.ImageUrl" 
+                            alt="Home Showcase Image" 
+                            class="home-showcase-grid-item-img" 
+                        />   
+                    </div>
+                    <div class ="home-showcase-grid-item-wrap">
+                        <h3 class="home-showcase-grid-item-title">@obj.Name</h3>
+                        <h5 
+                            class="home-showcase-grid-item-stock" 
+                            data-qty="@obj.Quantity">
+                            Skladem: @obj.Quantity Ks
+                        </h5>
+                        <div class="home-showcase-grid-item-info-wrap">
+                            @if (@obj.Discount > 0) {
+                                <div>
+                                    <span class="home-showcase-grid-item-price" style="text-decoration: line-through">
+                                        @obj.Price Kč
+                                    </span>
+                                    <span>
+                                        @obj.Discount Kč
+                                    </span>
+                                </div>
+                            } else {
+                                <span class="home-showcase-grid-item-price">
+                                    @obj.Price Kč
+                                </span>
+                            }
+                            <button 
+                                class="home-showcase-grid-item-btn" 
+                                data-cena="@obj.Price" 
+                                id="@obj.ProductId">
+                                Koupit
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
             }
         }
     </div>

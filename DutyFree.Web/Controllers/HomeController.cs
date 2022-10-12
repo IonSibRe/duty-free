@@ -25,6 +25,14 @@ namespace DutyFree.Web.Controllers
         public IActionResult Index()
         {
             IEnumerable <Product> objProductList = _db.Products.ToList();
+
+            List<string> categories = new List<string>();
+            foreach(Category category in _db.Categories)
+            {
+                categories.Add(category.CategoryName);
+            }
+
+            ViewData["Categories"] = categories;
             return View(objProductList);
         }
         public async Task<IActionResult> AddOrder(int productId)

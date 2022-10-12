@@ -64,12 +64,13 @@ html {
     bottom: 5px;
     transform: translateX(-50%);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .home-banner-lower-text {
     color: #fff;
     margin-bottom: 0;
+    margin-right: 0.5rem;
 }
 
 .underline {
@@ -78,6 +79,10 @@ html {
 }
 
 /* Showcase */
+.home-showcase-wrap {
+    margin-bottom: 5rem;
+}
+
 .home-showcase-grid-wrap {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -90,9 +95,37 @@ html {
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-.home-showcase-grid-item-wrap:first-child {
+.home-showcase-grid-item-span-wrap {
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    z-index: 999;
+}
+
+/* New; background-color: rgb(0, 160, 252);*/
+/* Discount; background-color: rgb(255, 250, 0);*/
+
+.home-showcase-grid-item-span-new {
+    display: block;
+    margin-bottom: 15px;
+    padding: 20px 15px;
+    border-radius: 50%;
+    font-weight: 600;
+    color: #fff;
+    background-color: rgb(0, 160, 252)
+}
+
+.home-showcase-grid-item-span-discount {
+    display: inline-block;
+    padding: 20px 10px;
+    border-radius: 50%;
+    background-color: rgb(255, 250, 0)
+}
+
+.home-showcase-grid-item-img-wrap {
     display: flex;
     align-items: center;
     flex: 3;
@@ -123,6 +156,7 @@ html {
 
 .home-showcase-grid-item-price {
     font-size: 1rem;
+    margin-right: 0.5rem;
 }
 
 .home-showcase-grid-item-info-wrap {
