@@ -5,7 +5,6 @@ function getFirstDayOfMonth() {
     return firstDay;
 }
 
-
 $(function () {
     $("#datepicker-od").datepicker({
     });
@@ -15,23 +14,20 @@ $(function () {
     $("#datepicker-do").datepicker("setDate", "today");
 });
 
-const ordersOrderTr = document.querySelectorAll(".orders-order-tr");
-let totalPrice = 0;
+var totalPrice = 0;
 
-ordersOrderTr.forEach(order => {
-    totalPrice += parseInt(order.getAttribute("data-price"));
+$(".orders-order-tr").each(function () {
+    totalPrice += parseInt($(this).attr("data-price"));
+    console.log(totalPrice);
 })
 
 updateTotalPrice();
 
-document.querySelectorAll(".orders-tabulka-button").forEach(removeBtn => {
-    removeBtn.addEventListener("click", (e) => {
-        totalPrice -= parseInt(e.target.parentNode.parentNode.getAttribute("data-price"));
-        updateTotalPrice();
-        e.target.parentNode.parentNode.remove();
-    })
-})
+$(document).on("click", ".orders-tabulka-button", function () {
+    totalPrice -= parseInt($(this).closest("tr").attr("data-price"));
+    updateTotalPrice()
+});
 
 function updateTotalPrice() {
-    document.querySelector(".orders-total-td").textContent = totalPrice + " kč";
+    $(".orders-total-td").text(`${totalPrice} Kč`);
 }

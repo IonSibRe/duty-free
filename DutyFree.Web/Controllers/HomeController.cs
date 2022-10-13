@@ -44,7 +44,7 @@ namespace DutyFree.Web.Controllers
 
             var order = new Order() {
                 Name = product.Name,
-                Price = product.Price,
+                Price = product.Discount > 0 ? product.Discount : product.Price,
                 UserId = user.UserId,
                 ProductId = product.ProductId
             };

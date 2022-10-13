@@ -38,7 +38,7 @@ a {
     padding: 1rem 2rem;
     background-color: rgba(0, 0, 0, 0.5);
     border-bottom: 1px solid #fff;
-    z-index: 999;
+    z-index: 5000;
 }
 
 .nav-inner-wrap {
@@ -120,6 +120,7 @@ footer {
     position: fixed;
     bottom: 0px;
     width: 100%;
+    z-index: 5000;
 }
 
 @media screen and (max-width: 550px) {

@@ -5,6 +5,18 @@ ul {
     margin-bottom: 0px;
 }
 
+.dropbtn {
+    color: white !important;
+}
+
+#myDropdown a:hover {
+    color: black !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
 .admin-banner {
     width: 100%;
     height: 40vh;

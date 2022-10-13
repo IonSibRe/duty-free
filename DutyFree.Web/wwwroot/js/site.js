@@ -123,9 +123,9 @@ $(document).on("click", ".admin-edit-button", function () {
             else {
                 $(this).prepend(
                     '<div class="input-group discount-edit" style="align-items: center; gap: 10px;">'
-                    + '<input type="number" id="price-before" name="Price" form="edit" value="' + `${price}` + '" class="form-control" required/>'
+                    + '<input type="number" id="price-before" name="Price" form="edit" value="' + `${price}` + '" class="form-control" min="1" required/>'
                     + '<span><i class="fa-solid fa-arrow-right"></i></span>'
-                    + '<input type="number" id="price-after" name="Price-After" form="edit" value="' + `${priceAfter}` + '" class="form-control" required/>'
+                    + '<input type="number" id="price-after" name="Price-After" form="edit" value="' + `${priceAfter}` + '" class="form-control" min="0" required/>'
                     + ' Kč</div>'
                 );  
             }
@@ -134,7 +134,7 @@ $(document).on("click", ".admin-edit-button", function () {
         row.find("#quantity").each(function () {
             $(this).empty();
             $(this).prepend(
-                '<input type="number" class="form-control quantity-edit" name="Quantity" form="edit" value="' + `${quantity}` + '" required/>'
+                '<input type="number" class="form-control quantity-edit" name="Quantity" form="edit" value="' + `${quantity}` + '" min="0" required/>'
             );
         });
 
@@ -236,7 +236,7 @@ $(".home-showcase-grid-item-btn").click(function () {
 });
 
 // Remove Order
-$(".orders-tabulka-button").click(function () {
+$(document).on("click", ".orders-tabulka-button", function () {
     let id = $(this).attr("id");
     let productId = $(this).attr("data-productId");
 
@@ -244,14 +244,15 @@ $(".orders-tabulka-button").click(function () {
         type: "POST",
         url: `/UserOrders/DeleteOrder?orderId=${id}&productId=${productId}`
     })
-})
 
+    $(this).closest("tr").remove();
+})
 
 // Filter Products
 const homeBannerSearchInput = document.querySelector(".home-banner-search-input");
 let products = document.querySelectorAll(".home-showcase-grid-item");
 
-homeBannerSearchInput.addEventListener("input", (e) => {
+$(document).on("input", homeBannerSearchInput, (e) => {
     let inputValue = e.target.value.toLowerCase();
     console.log(inputValue);
 

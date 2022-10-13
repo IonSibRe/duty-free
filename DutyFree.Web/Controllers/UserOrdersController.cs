@@ -3,6 +3,7 @@ using DutyFree.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace DutyFree.Web.Controllers
 {
@@ -39,25 +40,19 @@ namespace DutyFree.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ShowTableAsync(string dateFrom, string dateTo)
+        public async Task<IActionResult> ShowTableAsync(DateTime dateFrom, DateTime dateTo)
         {
             var user = await _db.Users.FindAsync(
                int.Parse(User.FindFirst("UserId").Value)
            );
 
-            long dateFromLong = long.Parse(dateFrom);
-            var dateFromConverted = new DateTime(dateFromLong, DateTimeKind.Local);
-
-            long dateToLong = long.Parse(dateTo);
-            var dateToConverted = new DateTime(dateToLong, DateTimeKind.Local);
-
             var query = _db.Orders
-                .Where(o => dateFromConverted <= o.DateCreated && o.DateCreated <= dateToConverted.AddDays(1) && o.UserId == user.UserId);
+                .Where(o => dateFrom <= o.DateCreated && o.DateCreated <= dateTo.AddDays(1) && o.UserId == user.UserId);
 
             var orders = await query
                 .OrderByDescending(o => o.DateCreated)
                 .ToListAsync();
-  
+
             return PartialView("UserOrdersTable", orders);
         }
     }

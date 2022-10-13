@@ -58,34 +58,25 @@
         }
 
         function RefreshTable() {
-
-            let dateFromConverted = dateFromObj.toISOString();
-            let dateToConverted = dateToObj.toISOString();
+           
+            let dateFromConverted = $("#datepicker-od").datepicker("getDate").toDateString();
+            let dateToConverted = $("#datepicker-do").datepicker("getDate").toDateString();
 
             $.ajax({
-                type: "POST",
-                url: 'UserOrders/ShowTableAsync',
+                type: "GET",
+                url: '@Url.Action("ShowTable","UserOrders")',
                 data: {
                     "dateFrom": dateFromConverted,
                     "dateTo": dateToConverted
                 },
-                contentType: "application/json; charset=utf-8",
-                success: function (msg) {
-                    alert(msg);
-                },
-                error: function (e) {
-                    alert(e);
-                    console.log(dateFromObj);
-                    console.log(dateToObj)
+                success: function(result){
+                    $("tbody").html(result);
                 }
             });
         }
 
         $(function () {
             /* Initialization of datepickers */
-
-            const table = $("#orders-table");
-
 
             $("#datepicker-od").datepicker();
             $("#datepicker-od").datepicker("setDate", getFirstDayOfMonth());
@@ -97,6 +88,8 @@
 
             console.log("DateFrom is now: " + @dateFrom);
             console.log("DateTo is now: " + @dateTo);
+
+            RefreshTable();
 
             /* onChange event of datepickers */
             $("#datepicker-od").datepicker({
@@ -123,7 +116,7 @@
             })
                 .on("change", function () {
                     dateToObj = $("#datepicker-do").datepicker("getDate");
-                    @dateTo = dateToObj();
+                    @dateTo = dateToObj;
                     dateFromObj = $("#datepicker-od").datepicker("getDate");
                     @dateFrom = dateFromObj;
                     @dateFromISO = GetISODate(dateFromObj);
@@ -142,6 +135,7 @@
 </head>
 
 <link rel="stylesheet" href="~/css/userOrders.css" asp-append-version="true" />
+<script src="~/js/orders.js" defer></script>
 
 <body>
     <section class="orders-banner">
@@ -165,7 +159,7 @@
         </div>
 
         <div class="orders-tabulka">
-            @Html.Partial("UserOrdersTable")
+            @await Html.PartialAsync("UserOrdersTable")
         </div>
         <div class="orders-export">
             <button class="orders-export-button" type"button">Export</button>

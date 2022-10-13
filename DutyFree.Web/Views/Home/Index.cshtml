@@ -29,6 +29,7 @@
 <section class="home-showcase-wrap">
     <div class="home-showcase-grid-wrap">
         @foreach(var obj in Model) {
+            int price = 0;
             @if (!obj.isDeleted) {
                 double discountDisplay = 100 - (((double)obj.Discount / (double)obj.Price) * 100);
                 <div class="home-showcase-grid-item">
@@ -43,13 +44,13 @@
                             @if (obj.Discount > 0) {
                                 @if (discountDisplay > 0) {
                                     <span class="home-showcase-grid-item-span home-showcase-grid-item-span-discount">
-                                            -@discountDisplay%
+                                            -@((int)discountDisplay)%
                                             
                                     </span>
                                 } else {
                                     discountDisplay *= -1;
                                     <span class="home-showcase-grid-item-span home-showcase-grid-item-span-discount" >
-                                            +@discountDisplay%
+                                        +@((int)discountDisplay)%
                                     </span>
                                 }
                             }
@@ -79,15 +80,18 @@
                                         @obj.Discount Kč
                                     </span>
                                 </div>
+
+                                price = obj.Discount;
                             } else {
                                 <span class="home-showcase-grid-item-price">
                                     @obj.Price Kč
                                 </span>
+                                price = obj.Price;
                             }
-                            <button 
-                                class="home-showcase-grid-item-btn" 
-                                data-cena="@obj.Price" 
-                                id="@obj.ProductId">
+
+                            <button class="home-showcase-grid-item-btn"
+                            data-cena="@price"
+                            id="@obj.ProductId">
                                 Koupit
                             </button>
                         </div>

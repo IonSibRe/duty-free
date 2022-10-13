@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<Order>
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    int total = 0, cenaCelkem = 0;
 }
 
- <table id="orders-table">
+<table id="orders-table">
     <tr id="head">
         <th>Datum</th>
         <th>Čas</th>
@@ -15,26 +13,34 @@
     </tr>
     @foreach (var obj in Model)
     {
-        /*if (obj.DateCreated > DateTime.Parse(dateTo))*/
-        <tr>
-            <td>@obj.DateCreated</td>
-            <td>13:00</td>
+        cenaCelkem += obj.Price;
+        var date = obj.DateCreated.ToString("dd.MM.yyyy");
+        var time = obj.DateCreated.ToString("HH:mm:ss");
+        <tr class="orders-order-tr" data-price="@obj.Price">
+            <td>@date</td>
+            <td>@time</td>
             <td>@obj.Name</td>
-            <td>@obj.Price CZK</td>
+            <td>@obj.Price Kč</td>
             <td>
-                @if (obj.DateCreated.AddHours(24) > DateTime.Now)
+                @if(obj.DateCreated.AddHours(24) > DateTime.Now)
                 {
-                    <a class="orders-tabulka-button" href="/UserOrders/DeleteOrder?productId=@obj.ProductId">❌</a>
+                <button class="orders-tabulka-button"
+                    id=@obj.OrderId
+                    data-productId=@obj.ProductId
+                    type="button">
+                    ❌
+                </button>
                 }
             </td>
         </tr>
-        /*total += obj.Price;*/
+
+        total += obj.Price;
     }
     <tr id="bottom" class="orders-total">
         <th>Cena celkem:</th>
         <th></th>
         <th></th>
-        <!--<th>total.ToString() CZK</th>-->
+        <th class="orders-total-td">@total Kč</th>
         <th></th>
     </tr>
 </table>
