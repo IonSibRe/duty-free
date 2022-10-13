@@ -57,8 +57,36 @@
             console.log("DateTo is now: " + @dateTo);
         }
 
+        function RefreshTable() {
+
+            let dateFromConverted = dateFromObj.toISOString();
+            let dateToConverted = dateToObj.toISOString();
+
+            $.ajax({
+                type: "POST",
+                url: 'UserOrders/ShowTableAsync',
+                data: {
+                    "dateFrom": dateFromConverted,
+                    "dateTo": dateToConverted
+                },
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert(e);
+                    console.log(dateFromObj);
+                    console.log(dateToObj)
+                }
+            });
+        }
+
         $(function () {
             /* Initialization of datepickers */
+
+            const table = $("#orders-table");
+
+
             $("#datepicker-od").datepicker();
             $("#datepicker-od").datepicker("setDate", getFirstDayOfMonth());
 
@@ -86,6 +114,9 @@
                     } else {
                         console.log("DateFrom is now: " + @dateFrom);
                     }
+                    
+                    RefreshTable();
+
                 });
 
             $("#datepicker-do").datepicker({
@@ -103,6 +134,8 @@
                     }else{
                         console.log("DateTo is now: " + @dateTo);
                     }
+
+                    RefreshTable();
                 });
         });
     </script>
